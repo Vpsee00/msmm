@@ -96,7 +96,7 @@ apt-get -y install webmin
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 # dropbear
 apt-get -y install dropbear
-wget -O /etc/default/dropbear "http://rzvpn.net/random/dropbear"
+wget -O /etc/default/dropbear "http://vpsproject.me/Debian9/dropbear"
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 # squid3
