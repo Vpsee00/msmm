@@ -1,22 +1,22 @@
 #!/bin/bash
-######################################
-#| Autoscript SSH + VPN for CentOS 7 |
-######################################
-
-set -e
-myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
-myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
-if [[ $EUID != 0 ]]; then
-    echo "Script needs to be run as root user"
-exit 1
+MYIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
+#MYIP=$(ifconfig | grep 'inet addr:' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d: -f2 | awk '{ print $1}' | head -1)
+if [ "$MYIP" = "" ]; then
+	MYIP=$(wget -qO- ipv4.icanhazip.com)
+	MYIP2="s/xxxxxxxxx/$MYIP/g";
 fi
-if [[ ! -e /dev/net/tun ]]; then
-    echo "TUN is not available"
-exit 2
-fi
-echo "OK ! The installation will start now !"
 
-source="https://github.com/BradVPN/centos7sh"
+#vps="dg-network";
+vps="dg-network";
+
+#if [[ $vps = "dg-network" ]]; then
+	#source="http://"
+#else
+	source="https://raw.githubusercontent.com/BradVPN/centos7sh/master"
+#fi
+
+# go to root
+cd
 
 # Reset
 noclr='\e[0m'
