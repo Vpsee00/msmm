@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 #Requirement
 if [ ! -e /usr/bin/curl ]; then
