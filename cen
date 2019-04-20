@@ -18,10 +18,6 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 cd
 
 
-	else
-		echo "";
-fi
-echo "$scriptname" >> /var/lib/setup-log/setup.txt
 
 # disable se linux
 echo 0 > /selinux/enforce
